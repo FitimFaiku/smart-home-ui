@@ -1,0 +1,39 @@
+<svg
+        width="26"
+        height="24"
+        viewBox="0 0 26 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+>
+    <title>Profil</title>
+    <path
+            d="M19.3818 0.80835V6.77871H25.2111L19.3818 0.80835Z"
+            stroke="#343434"
+            stroke-miterlimit="10"
+            stroke-linejoin="round"
+    />
+    <path
+            d="M25.2108 6.77871V23.1918H0.789062V0.80835H19.3815L25.2108 6.77871Z"
+            stroke="#343434"
+            stroke-width="1.5"
+            stroke-miterlimit="10"
+            stroke-linejoin="round"
+    />
+    <path
+            d="M4.77686 17.6632C4.77686 14.9582 6.91283 12.7705 9.55387 12.7705C12.1949 12.7705 14.3309 14.9582 14.3309 17.6632"
+            stroke="#343434"
+            stroke-width="1.5"
+            stroke-miterlimit="10"
+            stroke-linejoin="round"
+    />
+    <path
+            d="M9.55407 11.3695C11.0011 11.3695 12.1741 10.1681 12.1741 8.68612C12.1741 7.2041 11.0011 6.00269 9.55407 6.00269C8.10709 6.00269 6.93408 7.2041 6.93408 8.68612C6.93408 10.1681 8.10709 11.3695 9.55407 11.3695Z"
+            stroke="#343434"
+            stroke-width="1.5"
+            stroke-miterlimit="10"
+            stroke-linejoin="round"
+    />
+    <path d="M16.6772 11.9084H21.6857" stroke="#343434" stroke-miterlimit="10" />
+    <path d="M16.6772 14.4624H21.6857" stroke="#343434" stroke-miterlimit="10" />
+    <path d="M16.6772 17.0273H21.6857" stroke="#343434" stroke-miterlimit="10" />
+</svg>

@@ -1,0 +1,107 @@
+.Section {
+  &--warmgrey {
+    position: relative;
+
+    .Section__background {
+      border-top: 0.1rem solid color(grey, 15);
+      background: color(warmgrey);
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+    }
+  }
+
+  &__image {
+    cursor: pointer;
+
+    @include bp($bp-2) {
+      max-height: 30rem;
+    }
+
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.5s;
+  }
+
+  &__image--enlarged {
+    @include bp($bp-2) {
+      max-height: 100rem;
+      transition: all 0.5s;
+    }
+  }
+
+  &__image-box {
+    overflow: hidden;
+    position: relative;
+    transition: all 1s;
+  }
+
+  &__link-box {
+    @include content-area;
+
+    .Button__content {
+      .Button__icon {
+        margin-top: 0.4rem;
+
+        @include bp($bp-2) {
+          margin-top: 0.3rem;
+        }
+      }
+    }
+  }
+
+  &__content {
+    @include content-area;
+    margin: 0 auto;
+  }
+
+  &__title-box {
+    @include content-area;
+    @include margin-bottom($xl);
+  }
+
+  &__link {
+    @include margin-bottom($xl);
+  }
+
+  &__title {
+    position: relative;
+    color: color(brandgreen);
+    @include order-1;
+    font-weight: 300;
+    outline: none;
+    word-break: break-word;
+    hyphens: auto;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 0.2rem;
+      background: color(brandgreen);
+      @include -left($xl);
+    }
+  }
+
+  &__padding-bottom {
+    @include padding-bottom($xxxl);
+  }
+
+  &__padding-top {
+    @include padding-top($xxl);
+  }
+
+  &__icon-container {
+    display: flex;
+    justify-content: center;
+    @include margin-top($xxl);
+
+    svg {
+      width: 13rem;
+    }
+  }
+}

@@ -1,0 +1,198 @@
+/**
+*
+*   Breakpoints
+*
+*/
+
+$bp-1: 20em; // 320px
+$bp-2: 48em; // 768px
+$bp-3: 64em; // 1024px
+
+$custom-min-bp-1: 58.188em;
+$custom-bp-1: 58.125em; // custom breakpoint for the main menu
+
+$bp-list: $bp-1, $bp-2, $bp-3;
+
+/**
+*
+*   Spacings
+*
+*/
+
+$content-width: 100rem;
+
+$xxs: (
+  0: 0,
+  $bp-1: 0.4rem,
+  $bp-2: 0.4rem,
+  $bp-3: 0.4rem,
+);
+
+$xs: (
+  0: 0,
+  $bp-1: 0.8rem,
+  $bp-2: 0.8rem,
+  $bp-3: 0.8rem,
+);
+$s: (
+  0: 0,
+  $bp-1: 1.2rem,
+  $bp-2: 1.2rem,
+  $bp-3: 1.2rem,
+);
+$m: (
+  0: 0,
+  $bp-1: 1.6rem,
+  $bp-2: 1.6rem,
+  $bp-3: 1.6rem,
+);
+$l: (
+  0: 0,
+  $bp-1: 2rem,
+  $bp-2: 2rem,
+  $bp-3: 2rem,
+);
+$xl: (
+  0: 0,
+  $bp-1: 2.4rem,
+  $bp-2: 2.8rem,
+  $bp-3: 3.2rem,
+);
+$xxl: (
+  0: 0,
+  $bp-1: 3.2rem,
+  $bp-2: 4rem,
+  $bp-3: 4.8rem,
+);
+$xxxl: (
+  0: 0,
+  $bp-1: 4.8rem,
+  $bp-2: 6rem,
+  $bp-3: 6.8rem,
+);
+/* *
+*
+*   FONTS
+*
+* */
+$order-1: (
+  $bp-1: (
+    3.6rem,
+    2.8rem,
+  ),
+  $bp-2: (
+    4rem,
+    3.2rem,
+  ),
+  $bp-3: (
+    4.4rem,
+    3.6rem,
+  ),
+);
+$order-2: (
+  $bp-1: (
+    2.8rem,
+    2rem,
+  ),
+  $bp-2: (
+    3.2rem,
+    2.4rem,
+  ),
+  $bp-3: (
+    3.2rem,
+    2.4rem,
+  ),
+);
+$copy-1: (
+  $bp-1: (
+    2.4rem,
+    1.6rem,
+  ),
+  $bp-2: (
+    2.8rem,
+    1.8rem,
+  ),
+  $bp-3: (
+    2.8rem,
+    1.8rem,
+  ),
+);
+$copy-2: (
+  $bp-1: (
+    2.4rem,
+    1.4rem,
+  ),
+  $bp-2: (
+    2.4rem,
+    1.6rem,
+  ),
+  $bp-3: (
+    2.4rem,
+    1.6rem,
+  ),
+);
+/* *
+*
+*   Colors
+* */
+$palette: (
+  black: (
+    100: #000000,
+  ),
+  blue: (
+    100: #4a88cb,
+  ),
+  brandgreen: (
+    100: #0e8700,
+  ),
+  brandred: (
+    100: #d40000,
+    50: #e77373,
+    25: #f4bdbd,
+  ),
+  brown: (
+    100: #8b360d,
+  ),
+  darkblue: (
+    100: #1d4a7f,
+  ),
+  darkviolet: (
+    100: #942093,
+  ),
+  green: (
+    100: #5fa037,
+  ),
+  grey: (
+    100: #323232,
+    85: #505050,
+    50: #949494,
+    15: #dadada,
+  ),
+  lightgreen: (
+    100: #b9d58d,
+    50: #dceac6,
+  ),
+  linkblue: (
+    100: #3366bb,
+  ),
+  orange: (
+    100: #f07c00,
+  ),
+  safarigreen: (
+    100: #807f04,
+  ),
+  violet: (
+    100: #cc82e2,
+  ),
+  warmgrey: (
+    100: #f8f7f4,
+  ),
+  white: (
+    100: #ffffff,
+  ),
+  yellow: (
+    100: #feb50a,
+  ),
+);
+$indicator: #0f6000;
+/* * Not part of the colorset! */

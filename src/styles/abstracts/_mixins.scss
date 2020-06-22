@@ -1,0 +1,1062 @@
+/// Simple Media Manager
+///
+///
+/// @access public
+/// @param {Breakpoint} $point - Breakpoint
+///
+/// @example scss - Usage
+///   .foo {
+///     @include bp($bp-1){
+///       background: red;
+///     };
+///   }
+///
+@mixin bp($point) {
+  @each $bp in $bp-list {
+    @if ($bp==$point) {
+      @if ($point==$bp-1) {
+        $bp: 0;
+      }
+
+      @media (min-width: $bp) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin bp-max($point) {
+  @each $bp in $bp-list {
+    @if ($bp==$point) {
+      $effectiveBp: 0;
+
+      @if ($bp==$bp-1) {
+        $effectiveBp: $bp;
+      } @else {
+        $effectiveBp: $bp - 0.0625;
+      }
+
+      @media (max-width: $effectiveBp) {
+        @content;
+      }
+    }
+  }
+}
+
+/// Mixin helping defining margin.
+///
+///
+/// @access public
+/// @param {Spacings} $args [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+///     @include margin(`top`,`right`,`bottom`,`left`);
+///     @include margin(`top`,`left/right`,`bottom`);
+///     @include margin(`top/bottom`,`left/right`);
+///     @include margin(`top/right/bottom/left`);
+///   }
+///
+///   .bar {
+///     @include margin(1.5rem,$xxxl,0,auto);
+///   }
+///
+@mixin margin($args...) {
+  $one: 0;
+  $two: 0;
+  $three: 0;
+  $four: 0;
+  $length: length($args);
+
+  @each $bp in $bp-list {
+    @for $i from 1 through $length {
+      $input: nth($args, $i);
+      $value: auto;
+
+      @if (is-relative-length($input)) {
+        $value: $input;
+      } @else if ($input !=0 and $input !=auto) {
+        $value: map-get($input, $bp);
+      } @else if ($input==0) {
+        $value: 0;
+      }
+
+      @if ($i==1) {
+        $one: $value;
+      }
+
+      @if ($i==2) {
+        $two: $value;
+      }
+
+      @if ($i==3) {
+        $three: $value;
+      }
+
+      @if ($i==4) {
+        $four: $value;
+      }
+    }
+
+    $index: index($bp-list, $bp);
+
+    @if ($index==1) {
+      $bp: 0;
+    }
+
+    @media (min-width: $bp) {
+      @if ($length==1) {
+        margin: $one;
+      } @else if ($length==2) {
+        margin: $one $two;
+      } @else if ($length==3) {
+        margin: $one $two $three;
+      } @else if ($length==4) {
+        margin: $one $two $three $four;
+      }
+    }
+  }
+}
+
+/// Mixin helping defining padding.
+///
+///
+/// @access public
+/// @param {Spacings} $args [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+///     @include padding(`top`,`right`,`bottom`,`left`);
+///     @include padding(`top`,`left/right`,`bottom`);
+///     @include padding(`top/bottom`,`left/right`);
+///     @include padding(`top/right/bottom/left`);
+///   }
+///
+///   .bar {
+///     @include padding($xs,$xxxl,0);
+///   }
+///
+@mixin padding($args...) {
+  $one: 0;
+  $two: 0;
+  $three: 0;
+  $four: 0;
+  $length: length($args);
+
+  @each $bp in $bp-list {
+    @for $i from 1 through $length {
+      $input: nth($args, $i);
+      $value: auto;
+
+      @if (is-relative-length($input)) {
+        $value: $input;
+      } @else if ($input !=0 and $input !=auto) {
+        $value: map-get($input, $bp);
+      } @else if ($input==0) {
+        $value: 0;
+      }
+
+      @if ($i==1) {
+        $one: $value;
+      }
+
+      @if ($i==2) {
+        $two: $value;
+      }
+
+      @if ($i==3) {
+        $three: $value;
+      }
+
+      @if ($i==4) {
+        $four: $value;
+      }
+    }
+
+    $index: index($bp-list, $bp);
+
+    @if ($index==1) {
+      $bp: 0;
+    }
+
+    @media (min-width: $bp) {
+      @if ($length==1) {
+        padding: $one;
+      } @else if ($length==2) {
+        padding: $one $two;
+      } @else if ($length==3) {
+        padding: $one $two $three;
+      } @else if ($length==4) {
+        padding: $one $two $three $four;
+      }
+    }
+  }
+}
+
+/// Mixins helping to define paddings.
+///
+///
+/// @access public
+/// @param {Spacings} $args [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+//      @include padding-top($xl);
+//      @include padding-right($xl,$m);
+//      @include padding-bottom($xl,$m,$l);
+//      @include padding-left($xl,$m,$l);
+///   }
+///
+///   .bar {
+///     @include padding-left($xl,$m,$l);
+///   }
+///
+
+@mixin padding-top($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        padding-top: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-top: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          padding-top: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          padding-top: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-top: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          padding-top: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          padding-top: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+@mixin padding-right($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        padding-right: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-right: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          padding-right: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          padding-right: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-right: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          padding-right: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          padding-right: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+@mixin padding-bottom($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        padding-bottom: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-bottom: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          padding-bottom: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          padding-bottom: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-bottom: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          padding-bottom: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          padding-bottom: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+@mixin padding-left($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        padding-left: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-left: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          padding-left: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          padding-left: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          padding-left: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          padding-left: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          padding-left: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+/// Mixins helping to define margins.
+///
+///
+/// @access public
+/// @param {Spacings} $args [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+//      @include margin-top($xl);
+//      @include margin-right($xl,$m);
+//      @include margin-bottom($xl,$m,$l);
+//      @include margin-left($xl,$m,$l);
+///   }
+///
+///   .bar {
+///     @include margin-left($xl,$m,$l);
+///   }
+///
+
+@mixin margin-top($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        margin-top: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-top: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          margin-top: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          margin-top: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-top: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          margin-top: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          margin-top: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+@mixin margin-right($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        margin-right: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-right: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          margin-right: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          margin-right: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-right: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          margin-right: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          margin-right: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+@mixin margin-bottom($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        margin-bottom: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-bottom: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          margin-bottom: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          margin-bottom: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-bottom: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          margin-bottom: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          margin-bottom: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+@mixin margin-left($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        margin-left: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-left: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          margin-left: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          margin-left: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          margin-left: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          margin-left: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          margin-left: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+/// Mixins helping defining the top property.
+///
+///
+/// @access public
+/// @param {Spacings} $top [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+///     @include top($xs);
+///   }
+///
+///
+@mixin top($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        top: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          top: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          top: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          top: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          top: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          top: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          top: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+/// Mixins helping defining the right property.
+///
+///
+/// @access public
+/// @param {Spacings} $right [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+///     @include right($xxl);
+///   }
+///
+///
+@mixin right($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        right: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          right: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          right: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          right: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          right: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          right: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          right: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+/// Mixins helping defining the bottom property.
+///
+///
+/// @access public
+/// @param {Spacings} $bottom [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+///     @include bottom($m);
+///   }
+///
+///
+@mixin bottom($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        bottom: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          bottom: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          bottom: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          bottom: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          bottom: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          bottom: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          bottom: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+/// Mixins helping defining the left property.
+///
+///
+/// @access public
+/// @param {Spacings} $left [0] - Spacings
+///
+/// @example scss - Usage
+///   .foo {
+///     @include left($s);
+///   }
+///
+///
+@mixin left($args...) {
+  $l: length($args);
+
+  @if ($l==1) {
+    @each $bp in $bp-list {
+      @include bp($bp) {
+        left: size(nth($args, 1), $bp);
+      }
+    }
+  } @else if ($l==2) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          left: size($map, $bp-1);
+        }
+      } @else {
+        @include bp($bp-2) {
+          left: size($map, $bp-2);
+        }
+
+        @include bp($bp-3) {
+          left: size($map, $bp-3);
+        }
+      }
+    }
+  } @else if ($l==3) {
+    @for $i from 1 through $l {
+      $map: nth($args, $i);
+
+      @if ($i==1) {
+        @include bp($bp-1) {
+          left: size($map, $bp-1);
+        }
+      } @else if ($i==2) {
+        @include bp($bp-2) {
+          left: size($map, $bp-2);
+        }
+      } @else {
+        @include bp($bp-3) {
+          left: size($map, $bp-3);
+        }
+      }
+    }
+  }
+}
+
+@mixin -left($left: 0) {
+  @each $bp in $bp-list {
+    $one: 0;
+
+    @if ($left !=0) {
+      $one: map-get($left, $bp);
+    }
+
+    $index: index($bp-list, $bp);
+
+    @if ($index==1) {
+      $bp: 0;
+    }
+
+    @media (min-width: $bp) {
+      left: $one * -1;
+    }
+  }
+}
+
+/// Mixins helping defining the CSS function translate.
+///
+///
+/// @access public
+/// @example scss - Usage
+///   .foo {
+///     @include translate($xs,$m);
+///   }
+///
+///   .bar {
+///     @include bottom(0,$l);
+///   }
+///
+@mixin translate($X: 0, $Y: 0) {
+  @each $bp in $bp-list {
+    $one: 0;
+    $two: 0;
+
+    @if ($X !=0) {
+      $one: map-get($X, $bp);
+    }
+
+    @if ($Y !=0) {
+      $two: map-get($Y, $bp);
+    }
+
+    $index: index($bp-list, $bp);
+
+    @if ($index==1) {
+      $bp: 0;
+    }
+
+    @media (min-width: $bp) {
+      transform: translate($one, $two);
+    }
+  }
+}
+
+/// Mixins helping defining font styles.
+///
+///
+/// @access public
+/// @example scss - Usage
+///   .foo {
+///     @include order-1;
+///   }
+///
+///   .bar {
+///     @include copy-2;
+///   }
+///
+@mixin order-1($mobile: false) {
+  @if $mobile {
+    line-height: 3.2rem;
+    font-size: 2.4rem;
+  } @else {
+    @each $bp in $bp-list {
+      $name: $bp;
+      $index: index($bp-list, $bp);
+
+      @if ($index==1) {
+        $bp: 0;
+      }
+
+      @media (min-width: $bp) {
+        $map: map-get($order-1, $name);
+        font-size: nth($map, 2);
+        line-height: nth($map, 1);
+      }
+    }
+  }
+}
+
+@mixin order-2($mobile: false) {
+  @if $mobile {
+    line-height: 2rem;
+    font-size: 1.8rem;
+  } @else {
+    @each $bp in $bp-list {
+      $name: $bp;
+      $index: index($bp-list, $bp);
+
+      @if ($index==1) {
+        $bp: 0;
+      }
+
+      @media (min-width: $bp) {
+        $map: map-get($order-2, $name);
+        font-size: nth($map, 2);
+        line-height: nth($map, 1);
+      }
+    }
+  }
+}
+
+@mixin copy-1($mobile: false) {
+  @if $mobile {
+    line-height: 2.2rem;
+    font-size: 1.6rem;
+  } @else {
+    @each $bp in $bp-list {
+      $name: $bp;
+      $index: index($bp-list, $bp);
+
+      @if ($index==1) {
+        $bp: 0;
+      }
+
+      @media (min-width: $bp) {
+        $map: map-get($copy-1, $name);
+        font-size: nth($map, 2);
+        line-height: nth($map, 1);
+      }
+    }
+  }
+}
+
+@mixin copy-2($mobile: false) {
+  @if $mobile {
+    line-height: 2rem;
+    font-size: 1.4rem;
+  } @else {
+    @each $bp in $bp-list {
+      $name: $bp;
+      $index: index($bp-list, $bp);
+
+      @if ($index==1) {
+        $bp: 0;
+      }
+
+      @media (min-width: $bp) {
+        $map: map-get($copy-2, $name);
+        font-size: nth($map, 2);
+        line-height: nth($map, 1);
+      }
+    }
+  }
+}
+
+@mixin label-1($mobile: false) {
+  @if $mobile {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  } @else {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}
+
+@mixin content-area($top: 0, $bottom: 0) {
+  margin: 0 auto;
+  width: 100%;
+
+  $paddings: (
+          $bp-1: 2rem,
+          $bp-2: 8rem,
+          $bp-3: 10rem,
+  );
+
+  @each $b, $p in $paddings {
+    @include bp($b) {
+      padding: size($top, $b) $p size($bottom, $b);
+      max-width: $content-width + (2 * $p);
+    }
+  }
+
+  @media (min-width: 77.5em) {
+    padding-left: 12rem;
+    padding-right: 12rem;
+    max-width: $content-width + (2 * 12rem);
+  }
+}
+
+@mixin sr-only {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}

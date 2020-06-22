@@ -1,0 +1,174 @@
+.Header {
+  background: color(white);
+  line-height: 1;
+  position: relative;
+  @include copy-2;
+
+  &__content-area {
+    @include content-area;
+    height: 7.1rem;
+    @include bp($bp-2) {
+      height: 8rem;
+    }
+  }
+
+  &__content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include padding-top($m);
+    @include padding-bottom($m);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo-box {
+    display: inline-block;
+    @include margin-right($l);
+  }
+
+  &__wwlogo--small {
+    height: 2.4rem;
+    @media (min-width: $custom-min-bp-1) {
+      display: none;
+    }
+  }
+
+  &__wwlogo {
+    height: 2.8rem;
+    @media (max-width: $custom-bp-1) {
+      display: none;
+    }
+  }
+
+  &__logo {
+    display: inline-block;
+    @include padding-bottom($xxs);
+    margin-bottom: size($xs, $bp-1) * -1;
+    border-bottom: 0.4rem solid transparent;
+
+    &:focus {
+      border-color: $indicator;
+    }
+  }
+
+  &__mobile-menu-button {
+    display: inline-flex;
+    background: none;
+    border: none;
+    align-items: center;
+    cursor: pointer;
+    @include label-1;
+
+    margin-bottom: size($xs, $bp-1) * -1;
+    @include padding-bottom($xxs);
+    @include margin-right($s);
+    border-bottom: 0.4rem solid transparent;
+
+    &:focus {
+      &:focus {
+        border-bottom: 0.4rem solid color(grey, 85);
+      }
+    }
+
+    &-icon {
+      @include margin-right($s);
+      display: inherit;
+      span {
+        display: inline-flex;
+      }
+    }
+
+    @media (min-width: $custom-min-bp-1) {
+      display: none;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background: color(warmgrey);
+
+    padding-top: size($l, $bp-1);
+    padding-bottom: size($l, $bp-1);
+
+    &--closed {
+      display: none;
+    }
+
+    @media (min-width: $custom-min-bp-1) {
+      padding-top: size($m, $bp-2);
+      padding-bottom: size($m, $bp-2);
+      &--closed {
+        display: flex;
+      }
+    }
+  }
+
+  &__menu-list {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    flex-direction: column;
+    @include content-area;
+    @media (min-width: $custom-min-bp-1) {
+      flex-direction: row;
+    }
+  }
+
+  &__menu-item {
+    &:not(:last-child) {
+      margin-bottom: size($m, $bp-1);
+      margin-right: 0;
+
+      @media (min-width: $custom-min-bp-1) {
+        margin-bottom: 0;
+        margin-right: size($xl, $bp-2);
+      }
+    }
+  }
+
+  &__link {
+    @include label-1;
+    color: color(grey);
+
+    @include padding-bottom($xxs);
+
+    &:focus {
+      border-bottom: 0.4rem solid $indicator;
+    }
+
+    &--selected,
+    &:hover {
+      border-bottom: 0.1rem solid $indicator;
+    }
+  }
+
+  &__icons-wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  &__decoration {
+    height: 0.4rem;
+    box-sizing: content-box;
+    background: linear-gradient(2.73deg, color(brandgreen) 10.56%, color(green) 63.36%);
+    border-bottom: 0.4rem solid color(lightgreen, 50);
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  &__popover {
+    .Link__child {
+      margin-top: 0.4rem;
+    }
+  }
+}

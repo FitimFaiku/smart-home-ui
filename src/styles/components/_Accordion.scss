@@ -1,0 +1,125 @@
+.Accordion {
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  &__button {
+    background: color(white);
+
+    text-align: left;
+    color: color(grey);
+    border-radius: 0.4rem;
+
+    cursor: pointer;
+
+    @include copy-2;
+    @include padding($l);
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+
+      span {
+        display: block;
+      }
+
+      &-header {
+        display: block;
+        @include copy-1();
+        @include margin-bottom($xxs);
+      }
+
+      span:not(:first-child) {
+        flex-grow: 1;
+      }
+    }
+
+    border: 1px solid #dadada;
+    box-shadow: 0 2px 5px rgba(0, 2, 5, 0.08);
+
+    &--open {
+      box-shadow: none;
+      border-bottom: 0px solid;
+      border-bottom-left-radius: 0rem;
+      border-bottom-right-radius: 0rem;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: 0.4rem;
+      z-index: -1;
+    }
+
+    &:active:after {
+      border: 0.4rem solid color(grey, 85);
+    }
+
+    &:focus:after {
+      border: 0.4rem solid $indicator;
+      background: color(lightgreen, 50);
+    }
+
+    &--open:after {
+      border-bottom: none;
+    }
+  }
+
+  .Accordion__button:not(.Accordion__button--open):not(:focus):hover {
+    transform: scaleX(1.01) scaleY(1.01) translateX(0);
+  }
+
+  &:focus {
+    transform: scaleX(1) scaleY(1) translateX(0);
+  }
+
+  &__error-message {
+    @include margin-top($s);
+    @include copy-2;
+    color: color(brandred, 100);
+  }
+
+  &__error-description {
+    @include copy-2;
+    color: color(brandred, 100);
+  }
+
+  &__item {
+    @include margin-bottom($xs);
+    background: color(white);
+    border-radius: 0.4rem;
+  }
+
+  &__item-content {
+    @include copy-2;
+    @include padding-top($l);
+    @include padding-bottom($xl);
+    @include padding-left($l);
+
+    padding-right: size($l, $bp-1);
+
+    @include bp($bp-2) {
+      padding-right: 9.2rem;
+    }
+
+    border-radius: 0.4rem;
+    border: 1px solid #dadada;
+    box-shadow: 0 2px 5px rgba(0, 2, 5, 0.08);
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  &__icon {
+    &--optional {
+      @include margin-right($l);
+    }
+  }
+}

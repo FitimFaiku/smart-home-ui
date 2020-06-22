@@ -1,0 +1,26 @@
+/* Get color from palette */
+@function color($color, $shade: 100) {
+  @if (map-has-key($palette, $color) == false) {
+    @error '#{$color} is not a valid color';
+  }
+
+  $color-map: map-get($palette, $color);
+
+  @if (map-has-key($color-map, $shade) == false) {
+    @error '#{$shade} is not a shade of #{$color}';
+  }
+
+  @return map-get($color-map, $shade);
+}
+
+@function is-number($value) {
+  @return type-of($value) == 'number';
+}
+
+@function is-relative-length($value) {
+  @return is-number($value) and index('em' 'ex' 'ch' 'rem' 'vw' 'vh' 'vmin' 'vmax' '%', unit($value)) != null;
+}
+
+@function size($size, $bp) {
+  @return if(type-of($size) == 'map', map-get($size, $bp), 0);
+}
