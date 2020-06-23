@@ -1,0 +1,86 @@
+
+.Card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.4rem;
+  border: 1px solid color(grey, 15);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08);
+  transition: all 150ms ease-out;
+  @include margin-top($xl);
+
+  &--active {
+    border: 0.1rem solid color(grey, 85);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+
+    .Card__header {
+      background: color(lightgreen, 50);
+    }
+  }
+
+  &__header {
+    z-index: 3;
+    border-radius: 0.4rem 0.4rem 0 0;
+    display: flex;
+    align-items: center;
+    background: color(warmgrey);
+    height: 7rem;
+    border-bottom: 0.1rem solid color(grey, 15);
+    transition: all 150ms ease-out;
+    @include padding-left($m, $xl);
+
+    @include bp($bp-2) {
+      height: 8rem;
+    }
+
+    &--lightgreen {
+      background: color(lightgreen, 50);
+    }
+
+  }
+  &__container {
+    display: flex;
+  }
+
+  &__icon {
+    @include padding-right($m);
+  }
+
+  &__title {
+    flex: 1;
+    @include order-2;
+    font-weight: normal;
+    color: color(grey);
+  }
+
+  &__actions {
+    @include margin-left($xxl);
+    button{
+      @include margin-left($m);
+    }
+
+    @include bp-max($bp-1) {
+      display: none;
+    }
+  }
+
+  &__body {
+    @include padding-top($xl);
+    @include padding-right($m, $xl);
+    @include padding-bottom($l);
+    @include padding-left($m, $xl);
+    @include copy-2;
+    background: color(white);
+  }
+
+  &__form {
+    display: flex;
+
+    &--flex-column {
+      flex-direction: column;
+    }
+  }
+}
+svg {
+  width: 30px;
+  height: 30px;
+}

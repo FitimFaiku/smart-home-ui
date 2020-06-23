@@ -11,10 +11,13 @@
 @import 'components/Accordion';
 @import 'components/Header';
 @import 'components/Section';
+@import "components/BlndComponent";
+@import "components/Card";
 
 
 /** Pages */
-
+@import "containers/Light";
+@import "containers/Blind";
 
 /** Themes */
 @import 'themes/default';

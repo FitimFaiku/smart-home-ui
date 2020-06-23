@@ -1,0 +1,27 @@
+.BlindComponent__wrapper {
+  @include copy-2();
+  @include padding-bottom($m);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid green;
+  div {
+    @include padding-top($s);
+  }
+  button {
+    color: green;
+  }
+}
+.BlindComponent__title{
+  flex-grow: 4;
+}
+
+.Blind__Submit__Button{
+  input[type=submit] {
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+  }
+}

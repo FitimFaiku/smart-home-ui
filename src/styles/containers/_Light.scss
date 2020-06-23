@@ -1,0 +1,33 @@
+.Light__form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @include copy-2();
+  div {
+    @include margin-top($l);
+  }
+  label {
+    @include margin-left($s);
+  }
+
+  input[type=submit] {
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    @include margin-left($m);
+  }
+}
+.Light__mode_buttons{
+  button {
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    @include margin-left($m);
+  }
+}

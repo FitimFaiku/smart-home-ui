@@ -1,5 +1,5 @@
 export interface IBlindInterface {
-  id: string;
+  id?: string;
   description?: string;
   positionInPercent: number;
 }

@@ -118,8 +118,12 @@
   }
 
   &__icon {
+
     &--optional {
       @include margin-right($l);
+      width: 5rem;
+      height: 5rem;
+
     }
   }
 }

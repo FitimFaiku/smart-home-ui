@@ -1,6 +1,8 @@
 import * as React from 'react';
 import AccordionItem from "../../components/Accordion/AccordionItem/AccordionItem";
 import Accordion from "../../components/Accordion/Accordion";
+import Light from "../Light/Light";
+import Blind from "../Blind/Blind";
 
 
 const Home: React.FC = () => {
@@ -8,18 +10,19 @@ const Home: React.FC = () => {
   return (
       <div>
         <Accordion id={'home-page'} name={'Lights'} allowMultipleOpen={true} heading={"Hello"}>
-          <AccordionItem
-              name={'Light 1'}
-              title={'Light Title'}
-              icon={'rental-object-flat'}
-          >
-            <p>Hello Light item 1</p>
-          </AccordionItem>
-          <AccordionItem name={'öffne mich'} title="Center">
+
+          <AccordionItem name={'Weather'} title="Weather" icon={"weather"}>
             <p>Hello Accordion Item 2</p>
           </AccordionItem>
-          <AccordionItem name={'öffne mich'} title="End">
-            <p>Hello Accordion Item 2</p>
+            <AccordionItem
+                name={'Light'}
+                title={'Lights'}
+                icon={'lights'}
+            >
+                <Light />
+            </AccordionItem>
+          <AccordionItem name={'Blinds'} title="Blinds" icon={"blinds"}>
+            <Blind />
           </AccordionItem>
         </Accordion>
       </div>
