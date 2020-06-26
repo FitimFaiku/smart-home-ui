@@ -1,0 +1,22 @@
+.Weather__div__wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  @include copy-2();
+
+}
+.WeatherComponent__Element{
+  display: flex;
+  flex-direction: row;
+  @include margin-bottom($l);
+
+  svg {
+    @include margin-right($m);
+  }
+}
+.Weather__windAndDirection{
+  display: flex;
+  flex-direction: column;
+  @include copy-2();
+  justify-content: space-between;
+}

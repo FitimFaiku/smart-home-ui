@@ -3,6 +3,7 @@ import AccordionItem from "../../components/Accordion/AccordionItem/AccordionIte
 import Accordion from "../../components/Accordion/Accordion";
 import Light from "../Light/Light";
 import Blind from "../Blind/Blind";
+import Weather from "../Weather/Weather";
 
 
 const Home: React.FC = () => {
@@ -12,7 +13,7 @@ const Home: React.FC = () => {
         <Accordion id={'home-page'} name={'Lights'} allowMultipleOpen={true} heading={"Hello"}>
 
           <AccordionItem name={'Weather'} title="Weather" icon={"weather"}>
-            <p>Hello Accordion Item 2</p>
+            <Weather />
           </AccordionItem>
             <AccordionItem
                 name={'Light'}
